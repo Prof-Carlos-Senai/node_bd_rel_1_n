@@ -14,6 +14,23 @@ app.use(express.json())
 app.use(cors())
 // ----------------------------------------
 
+app.post('/produto', async (req,res)=>{
+    const valores = req.body
+    console.log(valores)
+    
+    try{
+        if(valores.fabricanteId == 1){
+            const pesq = await Produto.create(valores, {raw: true})
+            res.status(201).json(pesq)
+        }else{
+            res.status(404).json({message: "fabricante não existe"})
+        }
+    }catch(err){
+        console.error('Não foi possível consultar os dados!')
+        res.status(500).json({message: "Não foi possível consultar os dados!"})
+    }
+})
+
 app.get('/fabricante', async (req,res)=>{
     const valores = req.query
     console.log(valores)
