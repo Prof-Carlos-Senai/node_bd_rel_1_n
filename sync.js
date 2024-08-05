@@ -6,7 +6,7 @@ async function syncDataBase(){
         await conn.sync({force: true})
         console.log('Tabelas cridas e banco de dados sincronizado!')
     }catch(err){
-        console.error('Erro de sincronização com o banco de dados!')
+        console.error('Erro de sincronização com o banco de dados!',err)
     }finally{
         conn.close()
         console.log('Conexão do banco de dados fechada!')
